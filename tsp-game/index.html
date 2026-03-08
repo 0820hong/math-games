@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배달의 신: 최단경로 챌린지 | TSP Mini Game</title>
+  <meta name="description" content="모든 배달 지점을 최단거리로 방문하세요! 당신은 최적 경로의 몇 %?">
+  <meta property="og:title" content="배달의 신: 최단경로 챌린지">
+  <meta property="og:description" content="모든 배달 지점을 최단거리로 방문하세요! 당신은 최적 경로의 몇 %?">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Start Screen -->
+    <section id="screen-start" class="screen start-screen active">
+      <div class="game-icon">&#x1F6F5;</div>
+      <h1 class="game-title">배달의 신: 최단경로 챌린지</h1>
+      <p class="game-subtitle">최적의 배달 경로를 찾아라!</p>
+
+      <div class="difficulty-buttons">
+        <button class="btn-difficulty" data-difficulty="easy">
+          <span class="diff-label">Easy</span>
+          <br>
+          <span class="diff-desc">배달 지점 5개</span>
+        </button>
+        <button class="btn-difficulty" data-difficulty="normal">
+          <span class="diff-label">Normal</span>
+          <br>
+          <span class="diff-desc">배달 지점 7개</span>
+        </button>
+        <button class="btn-difficulty" data-difficulty="hard">
+          <span class="diff-label">Hard</span>
+          <br>
+          <span class="diff-desc">배달 지점 10개</span>
+        </button>
+      </div>
+
+      <div class="how-to-play">
+        <h3>게임 방법</h3>
+        <ol>
+          <li>출발점(S)에서 시작합니다</li>
+          <li>배달 지점을 클릭하여 경로를 만드세요</li>
+          <li>모든 지점 방문 후 출발점으로 복귀!</li>
+          <li>최적 경로 대비 몇 %인지 확인하세요</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Play Screen -->
+    <section id="screen-play" class="screen play-screen">
+      <div class="hud">
+        <div class="hud-item">
+          <span class="hud-label">난이도</span>
+          <span class="hud-value" id="hud-difficulty">Normal</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">방문</span>
+          <span class="hud-value" id="hud-visited">0/6</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">현재 거리</span>
+          <span class="hud-value"><span id="hud-distance">0.0</span></span>
+        </div>
+      </div>
+
+      <div id="canvas-container">
+        <canvas id="game-canvas" width="600" height="500"></canvas>
+      </div>
+
+      <div class="play-actions">
+        <button class="btn-action" id="btn-undo">되돌리기</button>
+        <button class="btn-action" id="btn-reset">초기화</button>
+      </div>
+    </section>
+
+    <!-- Result Screen -->
+    <section id="screen-result" class="screen result-screen">
+      <h2 class="result-title">결과 발표!</h2>
+
+      <div class="result-canvas-wrap">
+        <div id="canvas-container-result">
+          <!-- Canvas is reused from play screen -->
+        </div>
+      </div>
+
+      <div class="result-stats">
+        <div class="stat">
+          <div class="stat-label">내 거리</div>
+          <div class="stat-value" id="result-user-dist">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">최적 거리</div>
+          <div class="stat-value" id="result-optimal-dist">0</div>
+        </div>
+      </div>
+
+      <div class="result-ratio">최적 대비 <span id="result-ratio">100%</span></div>
+
+      <div class="result-grade" id="result-grade">S</div>
+      <div class="result-message" id="result-message">배달의 신!</div>
+
+      <div class="result-actions">
+        <button class="btn-result btn-primary" id="btn-share">결과 공유</button>
+        <button class="btn-result btn-secondary" id="btn-copy">텍스트 복사</button>
+        <button class="btn-result btn-secondary" id="btn-retry">다시 도전</button>
+        <button class="btn-result btn-secondary" id="btn-change">다른 난이도</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/tsp-solver.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/share.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시소 밸런스: 균형을 맞춰라! | Balance Puzzle</title>
+  <meta name="description" content="양쪽 숫자의 합을 같게 맞춰라! 균형 감각을 테스트하는 퍼즐 게임">
+  <meta property="og:title" content="시소 밸런스: 균형을 맞춰라!">
+  <meta property="og:description" content="양쪽 숫자의 합을 같게 맞춰라! 당신의 균형 감각은?">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../og-seesaw.png">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Start Screen -->
+    <section id="screen-start" class="screen start-screen active">
+      <div class="game-icon">&#x2696;</div>
+      <h1 class="game-title">시소 밸런스: 균형을 맞춰라!</h1>
+      <p class="game-subtitle">양쪽 합을 같게 만들어 타일을 제거하세요!</p>
+
+      <div class="difficulty-buttons">
+        <button class="btn-difficulty" data-difficulty="easy">
+          <span class="diff-label">Easy</span><br>
+          <span class="diff-desc">5x5 격자 / 90초</span>
+        </button>
+        <button class="btn-difficulty" data-difficulty="normal">
+          <span class="diff-label">Normal</span><br>
+          <span class="diff-desc">7x7 격자 / 120초</span>
+        </button>
+        <button class="btn-difficulty" data-difficulty="hard">
+          <span class="diff-label">Hard</span><br>
+          <span class="diff-desc">10x10 격자 / 180초</span>
+        </button>
+      </div>
+
+      <div class="how-to-play">
+        <h3>게임 방법</h3>
+        <ol>
+          <li>왼쪽과 오른쪽에서 숫자 타일을 선택</li>
+          <li>양쪽 합이 같으면 "확인" 클릭!</li>
+          <li>맞으면 타일 제거, 틀리면 콤보 리셋</li>
+          <li>제한 시간 안에 최고 점수를 노려보세요</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Play Screen -->
+    <section id="screen-play" class="screen play-screen">
+      <div class="hud">
+        <div class="hud-item">
+          <span class="hud-label">점수</span>
+          <span class="hud-value" id="hud-score">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">콤보</span>
+          <span class="hud-value" id="hud-combo">x0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">시간</span>
+          <span class="hud-value" id="hud-time">1:00</span>
+        </div>
+        <div class="hud-item hud-bgm">
+          <button class="btn-bgm" id="btn-bgm" title="BGM On/Off">&#x1f50a;</button>
+          <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="50" title="볼륨">
+        </div>
+      </div>
+
+      <div class="timer-bar">
+        <div class="timer-bar-fill" id="timer-bar-fill"></div>
+      </div>
+
+      <div class="game-area">
+        <!-- Left Board -->
+        <div class="board-section left">
+          <div class="board-label">왼쪽</div>
+          <div class="tile-grid" id="left-board"></div>
+          <div class="board-sum">합: <span id="left-sum">0</span></div>
+        </div>
+
+        <!-- Seesaw -->
+        <div class="seesaw-section">
+          <div class="seesaw-wrap">
+            <div class="seesaw-bar" id="seesaw-bar"></div>
+            <div class="seesaw-pivot"></div>
+          </div>
+          <div class="seesaw-indicator" id="seesaw-indicator">숫자를 선택하세요</div>
+        </div>
+
+        <!-- Right Board -->
+        <div class="board-section right">
+          <div class="board-label">오른쪽</div>
+          <div class="tile-grid" id="right-board"></div>
+          <div class="board-sum">합: <span id="right-sum">0</span></div>
+        </div>
+      </div>
+
+      <div class="play-actions">
+        <button class="btn-action btn-confirm" id="btn-confirm" disabled>선택 확인! <span class="key-hint">[Space]</span></button>
+        <button class="btn-action btn-clear-sel" id="btn-clear">선택 초기화</button>
+      </div>
+      <div class="play-actions play-actions-sub">
+        <button class="btn-action btn-sub btn-ingame-retry" id="btn-ingame-retry">재도전</button>
+        <button class="btn-action btn-sub btn-ingame-quit" id="btn-ingame-quit">나가기</button>
+      </div>
+    </section>
+
+    <!-- Result Screen -->
+    <section id="screen-result" class="screen result-screen">
+      <h2 class="result-title">게임 종료!</h2>
+
+      <div class="result-score-box">
+        <div class="result-score-label">최종 점수</div>
+        <div class="result-score-value" id="result-score">0</div>
+      </div>
+
+      <div class="result-stats">
+        <div class="stat">
+          <div class="stat-label">제거한 타일</div>
+          <div class="stat-value" id="result-clear-rate">0/0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">최대 콤보</div>
+          <div class="stat-value" id="result-max-combo">x0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">매칭 성공</div>
+          <div class="stat-value" id="result-match-count">0회</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">매칭 실패</div>
+          <div class="stat-value" id="result-miss-count">0회</div>
+        </div>
+      </div>
+
+      <div class="result-grade" id="result-grade">S</div>
+      <div class="result-message" id="result-message">완벽한 균형 마스터!</div>
+
+      <div class="share-buttons">
+        <button class="btn-sns btn-sns-x" id="btn-share-x" title="X (Twitter)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </button>
+        <button class="btn-sns btn-sns-fb" id="btn-share-fb" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </button>
+        <button class="btn-sns btn-sns-kakao" id="btn-share-kakao" title="KakaoTalk">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.523 0-10 3.582-10 8 0 2.834 1.863 5.32 4.664 6.727-.147.528-.535 1.917-.612 2.214-.097.372.136.367.287.267.118-.078 1.89-1.284 2.655-1.808A11.4 11.4 0 0 0 12 19c5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg>
+          카카오톡
+        </button>
+        <button class="btn-sns btn-sns-copy" id="btn-share-copy" title="링크 복사">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          링크복사
+        </button>
+        <button class="btn-sns btn-sns-img" id="btn-share" title="이미지 저장">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          이미지저장
+        </button>
+      </div>
+      <div class="share-toast" id="share-toast"></div>
+
+      <div class="result-actions">
+        <button class="btn-result btn-secondary" id="btn-retry">다시 도전</button>
+        <button class="btn-result btn-secondary" id="btn-change">다른 난이도</button>
+      </div>
+    </section>
+
+    <!-- Combo Popup -->
+    <div class="combo-popup" id="combo-popup"></div>
+
+  </div>
+
+  <script src="js/timer.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/seesaw.js"></script>
+  <script src="js/bgm.js"></script>
+  <script src="js/share.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

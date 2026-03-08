@@ -1,0 +1,19 @@
+# Test & build artifacts
+test_*.py
+gen_og_images.py
+*.pyc
+__pycache__/
+
+# PDCA docs (keep local only)
+**/docs/01-plan/
+**/docs/02-design/
+**/docs/03-analysis/
+**/docs/04-report/
+**/docs/archive/
+.bkit/
+.bkit-memory.json
+.pdca-status.json
+
+# OS
+.DS_Store
+Thumbs.db
