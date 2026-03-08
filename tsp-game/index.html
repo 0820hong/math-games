@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script async src="https://t1.daumcdn.net/kas/static/ba.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -49,6 +50,13 @@
           <li>모든 지점 방문 후 출발점으로 복귀!</li>
           <li>최적 경로 대비 몇 %인지 확인하세요</li>
         </ol>
+      </div>
+
+      <!-- Ad: Start Screen Banner -->
+      <div style="display:flex;justify-content:center;margin:20px auto;max-width:320px;">
+        <ins class="kakao_ad_area" style="display:none;"
+          data-ad-unit="DAN-XXXXXXXXXX"
+          data-ad-width="320" data-ad-height="100"></ins>
       </div>
     </section>
 
@@ -105,6 +113,13 @@
       <div class="result-grade" id="result-grade">S</div>
       <div class="result-message" id="result-message">배달의 신!</div>
 
+      <!-- Ad: Result Screen Banner -->
+      <div style="display:flex;justify-content:center;margin:16px auto;max-width:300px;">
+        <ins class="kakao_ad_area" style="display:none;"
+          data-ad-unit="DAN-YYYYYYYYYY"
+          data-ad-width="300" data-ad-height="250"></ins>
+      </div>
+
       <div class="result-actions">
         <button class="btn-result btn-primary" id="btn-share">결과 공유</button>
         <button class="btn-result btn-secondary" id="btn-copy">텍스트 복사</button>
@@ -112,6 +127,10 @@
         <button class="btn-result btn-secondary" id="btn-change">다른 난이도</button>
       </div>
     </section>
+
+    <div style="text-align:center;padding:16px 0;font-size:12px;">
+      <a href="../privacy.html" style="color:#ADB5BD;text-decoration:none;">개인정보 처리방침</a>
+    </div>
 
   </div>
 

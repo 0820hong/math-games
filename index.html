@@ -72,7 +72,11 @@
       .games { grid-template-columns: 1fr; }
       .hero-title { font-size: 22px; }
     }
+    .ad-container { display: flex; justify-content: center; margin: 0 auto 24px; }
+    .site-footer-link { font-size: 11px; color: #ADB5BD; text-decoration: none; }
+    .site-footer-link:hover { text-decoration: underline; }
   </style>
+  <script async src="https://t1.daumcdn.net/kas/static/ba.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -104,9 +108,17 @@
       </a>
     </div>
 
+    <!-- Ad: Portal Banner -->
+    <div class="ad-container">
+      <ins class="kakao_ad_area" style="display:none;"
+        data-ad-unit="DAN-ZZZZZZZZZZ"
+        data-ad-width="320" data-ad-height="100"></ins>
+    </div>
+
     <div class="footer">
       Math Game Collection<br>
-      Powered by Mathematical Optimization
+      Powered by Mathematical Optimization<br>
+      <a href="privacy.html" class="site-footer-link">개인정보 처리방침</a>
     </div>
   </div>
 </body>

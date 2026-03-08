@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script async src="https://t1.daumcdn.net/kas/static/ba.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -47,6 +48,13 @@
           <li>맞으면 타일 제거, 틀리면 콤보 리셋</li>
           <li>제한 시간 안에 최고 점수를 노려보세요</li>
         </ol>
+      </div>
+
+      <!-- Ad: Start Screen Banner -->
+      <div class="ad-container ad-start">
+        <ins class="kakao_ad_area" style="display:none;"
+          data-ad-unit="DAN-XXXXXXXXXX"
+          data-ad-width="320" data-ad-height="100"></ins>
       </div>
     </section>
 
@@ -165,6 +173,13 @@
       </div>
       <div class="share-toast" id="share-toast"></div>
 
+      <!-- Ad: Result Screen Banner -->
+      <div class="ad-container ad-result">
+        <ins class="kakao_ad_area" style="display:none;"
+          data-ad-unit="DAN-YYYYYYYYYY"
+          data-ad-width="300" data-ad-height="250"></ins>
+      </div>
+
       <div class="result-actions">
         <button class="btn-result btn-secondary" id="btn-retry">다시 도전</button>
         <button class="btn-result btn-secondary" id="btn-change">다른 난이도</button>
@@ -174,6 +189,10 @@
     <!-- Combo Popup -->
     <div class="combo-popup" id="combo-popup"></div>
 
+    <div class="site-footer">
+      <a href="../privacy.html">개인정보 처리방침</a>
+    </div>
+
   </div>
 
   <script src="js/timer.js"></script>
@@ -182,6 +201,7 @@
   <script src="js/seesaw.js"></script>
   <script src="js/bgm.js"></script>
   <script src="js/share.js"></script>
+  <script src="js/ad.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

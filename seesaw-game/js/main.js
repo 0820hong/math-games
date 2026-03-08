@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Object.keys(screens).forEach(function (key) {
       screens[key].classList.toggle("active", key === name);
     });
+    refreshScreenAds(name);
   }
 
   function updateHUD() {

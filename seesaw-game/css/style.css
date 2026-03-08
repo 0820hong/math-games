@@ -359,6 +359,24 @@ body {
 .btn-secondary { background: #FFF; color: var(--text); border: 1px solid var(--border); }
 .btn-secondary:hover { background: var(--bg); }
 
+/* Ad Container */
+.ad-container {
+  display: flex; justify-content: center; margin: 16px auto;
+  min-height: 0; overflow: hidden;
+}
+.ad-start { max-width: 320px; margin-top: 20px; }
+.ad-result { max-width: 300px; margin: 16px auto; }
+.ad-container:empty { display: none; }
+
+/* Site Footer */
+.site-footer {
+  text-align: center; padding: 16px 0; font-size: 12px;
+}
+.site-footer a {
+  color: var(--text-light); text-decoration: none;
+}
+.site-footer a:hover { text-decoration: underline; }
+
 /* Responsive */
 @media (max-width: 768px) {
   body { padding: 8px; }
