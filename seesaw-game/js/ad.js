@@ -9,6 +9,16 @@ var AD_CONFIG = {
   },
 };
 
+// SDK 로드 대기 후 adfit 호출 (async 로딩 대응)
+function tryAdfit(ins, retries) {
+  if (typeof retries === "undefined") retries = 20;
+  if (window.adfit) {
+    window.adfit(ins);
+  } else if (retries > 0) {
+    setTimeout(function () { tryAdfit(ins, retries - 1); }, 500);
+  }
+}
+
 function refreshAd(containerClass) {
   var container = document.querySelector("." + containerClass);
   if (!container) return;
@@ -29,9 +39,7 @@ function refreshAd(containerClass) {
   ins.setAttribute("data-ad-height", config.height);
   container.appendChild(ins);
 
-  if (window.adfit) {
-    window.adfit(ins);
-  }
+  tryAdfit(ins);
 }
 
 function refreshScreenAds(screenName) {
