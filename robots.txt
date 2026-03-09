@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://0820hong.github.io/math-games/sitemap.xml

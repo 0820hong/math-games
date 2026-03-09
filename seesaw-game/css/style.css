@@ -364,9 +364,50 @@ body {
   display: flex; justify-content: center; margin: 16px auto;
   min-height: 0; overflow: hidden;
 }
-.ad-start { max-width: 320px; margin-top: 20px; }
+.ad-start { max-width: 320px; margin-top: 20px; min-height: 250px; }
 .ad-result { max-width: 300px; margin: 16px auto; }
 .ad-container:empty { display: none; }
+
+/* PC Vertical Sidebar Ad (160x600) - 데스크탑 전용 */
+.ad-pc-vertical {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 160px;
+  min-height: 600px;
+  margin: 0;
+  z-index: 50;
+}
+
+/* Mobile Strip Ad (320x50) - 모바일 전용 */
+.ad-mobile-strip {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 50px;
+  margin: 0;
+  background: #FFF;
+  z-index: 50;
+  justify-content: center;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  display: none;
+}
+
+/* AdSense Container */
+.ad-adsense {
+  display: flex;
+  justify-content: center;
+  margin: 16px auto;
+  max-width: 728px;
+  min-height: 90px;
+}
+.ad-adsense ins {
+  max-width: 100%;
+}
 
 /* Site Footer */
 .site-footer {
@@ -379,7 +420,7 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-  body { padding: 8px; }
+  body { padding: 8px; padding-bottom: 58px; }
   .game-title { font-size: 21px; }
   .tile-value { font-size: clamp(9px, 2vw, 14px); }
   .tile { border-radius: 6px; }
@@ -389,4 +430,11 @@ body {
   .result-grade { font-size: 48px; }
   .combo-popup { font-size: 36px; }
   .volume-slider { width: 40px; }
+  .ad-pc-vertical { display: none !important; }
+  .ad-mobile-strip { display: flex !important; }
+}
+
+/* PC 세로 광고: 화면이 충분히 넓을 때만 표시 (콘텐츠 960px + 사이드 160px + 여백) */
+@media (max-width: 1200px) {
+  .ad-pc-vertical { display: none !important; }
 }
